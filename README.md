@@ -11,7 +11,7 @@ This is the ideamart SMS PHP API, using the classes here you can recieve message
     
     $receiver = new SMSReceiver(file_get_contents('php://input'));
     
-	$receiver->getMessage()     // Get the messsage recieved 
+    $receiver->getMessage()     // Get the messsage recieved 
     $receiver->getAddress()     // Get the address from which message was sent
     $receiver->getVersion()     // Get the version of the incomming request
     $receiver->getEncoding()        // Get the encoding of the incomming request
@@ -28,6 +28,7 @@ In production a appid and password will be provided when the app is be provision
 Production Server URLs
 
 HTTP - [http://api.dialog.lk:8080/send/sms](http://api.dialog.lk:8080/send/sms)
+
 HTTPS -  [https://api.dialog.lk/sms/send](https://api.dialog.lk/sms/send)
 
 
