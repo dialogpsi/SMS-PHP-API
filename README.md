@@ -50,6 +50,7 @@ HTTP -[http://localhost:7000/sms/send](http://localhost:7000/sms/send)
 
 
 **To send a SMS to a user**
+
 	$sender->sendMessage( 'This message is send to one particlar no', ADDRESS)
 
 **To send a SMS to number of users**
