@@ -1,4 +1,4 @@
-#[Ideamart sms PHP API](https://ideamart.lk) 
+#[Ideamart sms PHP API](http://www.ideamart.lk) 
 
 ---
 This is the ideamart SMS PHP API, using the classes here you can recieve messages, send messages to a address, list of addressses or a broadcast message and log using the log class.
