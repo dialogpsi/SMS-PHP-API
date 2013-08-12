@@ -27,7 +27,7 @@ In production a appid and password will be provided when the app is be provision
 
 Production Server URLs
 
-HTTP - [http://api.dialog.lk:8080/send/sms](http://api.dialog.lk:8080/send/sms)
+HTTP - [http://api.dialog.lk:8080/sms/send](http://api.dialog.lk:8080/sms/send)
 
 HTTPS -  [https://api.dialog.lk/sms/send](https://api.dialog.lk/sms/send)
 
