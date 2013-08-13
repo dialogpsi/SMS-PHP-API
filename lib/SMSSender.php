@@ -62,7 +62,7 @@ class SMSSender{
         	$res = curl_exec($ch);
         	curl_close($ch);
 
-		return $this->handleResponse(json_decode($response));
+		return $this->handleResponse(json_decode($res));
 
 	}
 	
