@@ -8,7 +8,8 @@
 // ==========================================
 
 require_once 'SMSServiceException.php';
-class SMSSender{
+require_once 'core.php';
+class SMSSender  extends Core{
 	private $applicationId,
 			$password,
 			$charging_amount='',
@@ -20,8 +21,8 @@ class SMSSender{
 			$serverURL;
 	
 	/* Send the server name, app password and app id
-	*	Dialog Production Severurl : HTTPS : - HTTPS://api.dialog.lk/sms/send 
-	*				     HTTP  : - http//api.dialog.lk:8080/send/sms
+	*	Dialog Production Severurl : HTTPS : - https://api.dialog.lk/sms/send
+	*				     HTTP  : - http://api.dialog.lk:8080/sms/send
 	*/		
 	public function __construct($serverURL, $applicationId, $password)
 	{
@@ -35,35 +36,19 @@ class SMSSender{
 	}
 	
 	// Broadcast a message to all the subcribed users
-	public function broadcastMessage($message){
-		return $this->sendMessage($message, array('tel:all'));
+	public function broadcast($message){
+		return $this->sms($message, array('tel:all'));
 	}
 	
 	// Send a message to the user with a address or send the array of addresses
-	public function sendMessage($message, $addresses){
+	public function sms($message, $addresses){
 		if(empty($addresses))
 			throw new SMSServiceException('Format of the address is invalid.', 'E1325');
 		else {
 			$jsonStream = (is_string($addresses))?$this->resolveJsonStream($message, array($addresses)):(is_array($addresses)?$this->resolveJsonStream($message, $addresses):null);
-			return ($jsonStream!=null)?$this->sendRequest($jsonStream):false;
+			return ($jsonStream!=null)?$this->sendRequest($jsonStream,$this->serverURL):false;
 		
 		}
-	}
-
-	// Send post the request to the server and get the response
-	private function sendRequest($jsonStream){
-
-		$ch = curl_init($this->serverURL);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-       		curl_setopt($ch, CURLOPT_POST, 1);
-        	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        	curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonStream);
-        	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        	$res = curl_exec($ch);
-        	curl_close($ch);
-
-		return $this->handleResponse(json_decode($res));
-
 	}
 	
 	private function handleResponse($jsonResponse){
@@ -81,16 +66,30 @@ class SMSSender{
 	
 	// Encode json for POST
 	private function resolveJsonStream($message, $addresses){
-	
+		
 		$messageDetails = array("message"=>$message,
-	   	           				"destinationAddresses"=>$addresses,
-           						"sourceAddress" => $sourceAddress,
-           						"chargingAmount" => $charging_amount,
-           						"encoding" => $encoding,
-           						"version" => $sourceAddress,
-           						"deliveryStatusRequest" => $deliveryStatusRequest,
-           						"binaryHeader" => $binaryHeader
+	   	           				"destinationAddresses"=>$addresses
            					);
+		
+		if (isset($sourceAddress)) {
+			$messageDetails=array("sourceAddress" => $sourceAddress);
+		}
+		
+		if (isset($deliveryStatusRequest)) {
+			$messageDetails=array("deliveryStatusRequest" => $deliveryStatusRequest);
+		}
+		
+		if (isset($binaryHeader)) {
+			$messageDetails=array("binaryHeader" => $binaryHeader);
+		}	
+		
+		if (isset($version)) {
+			$messageDetails=array("version" => $version);
+		}	
+		
+		if (isset($encoding)) {
+			$messageDetails=array("encoding" => $encoding);
+		}
 		
 		$applicationDetails = array('applicationId'=>$this->applicationId,
 						 'password'=>$this->password,);

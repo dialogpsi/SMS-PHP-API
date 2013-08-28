@@ -51,15 +51,15 @@ HTTP -[http://localhost:7000/sms/send](http://localhost:7000/sms/send)
 
 **To send a SMS to a user**
 
-	$sender->sendMessage( 'This message is send to one particlar no', ADDRESS)
+	$sender->sms( 'This message is send to one particlar no', ADDRESS)
 
 **To send a SMS to number of users**
 
-	$sender->sendMessage( 'Same message to all the address send', array(ADDRESS1, ADDRESS2, ...))
+	$sender->sms( 'Same message to all the address send', array(ADDRESS1, ADDRESS2, ...))
 
 **To broadcast a SMS to all the subcribers of the app**
 
-	$sender->broadcastMessage( 'This is a Broadcast Message')
+	$sender->broadcast( 'This is a Broadcast Message')
    
    
    

@@ -7,6 +7,7 @@
 // http://opensource.org/licenses/MIT
 // ==========================================
 
+ini_set('error_log', 'sms-app-error.log');
 require_once 'lib/Log.php';
 require_once 'lib/SMSReceiver.php';
 require_once 'lib/SMSSender.php';
@@ -34,12 +35,12 @@ try{
 	if ($message=='broadcast') {
 
 		// Send a broadcast message to all the subcribed users
-		$response = $sender->broadcastMessage("This is a broadcast message to all the subcribers of the application");
+		$response = $sender->broadcast("This is a broadcast message to all the subcribers of the application");
 	
 	}else{
 
 		// Send a SMS to a particular user
-		$response=$sender->sendMessage('This message is sent only to one user', $address);
+		$response=$sender->sms('This message is sent only to one user', $address);
 	}
 
 }catch(SMSServiceException $e){
