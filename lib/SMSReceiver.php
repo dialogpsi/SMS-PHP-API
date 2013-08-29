@@ -14,6 +14,7 @@ class SMSReceiver{
 	private $message;			
 	private	$requestId;			
 	private $encoding;			
+	private $thejson;			
 	
 	public function __construct($jsonRequest){
 		$jsonRequest = json_decode($jsonRequest);
@@ -30,6 +31,7 @@ class SMSReceiver{
 				if(!((isset($jsonRequest->sourceAddress) && isset($jsonRequest->message) )))
 					$response = array('statusCode'=>'E1312', 'statusDetail'=>'Request is Invalid.');
 		else{
+			$this->thejson=$jsonRequest ;
 			$this->version = $jsonRequest->version;
 			$this->applicationId = $jsonRequest->applicationId;
 			$this->sourceAddress = $jsonRequest->sourceAddress;
@@ -73,6 +75,11 @@ class SMSReceiver{
 	// Get the unique requestId of the incomming message	
 	public function getRequestId(){
 		return $this->requestId;
+	}
+
+	// Get the json
+	public function getJson(){
+		return $this->thejson;
 	}
 }
 ?>
