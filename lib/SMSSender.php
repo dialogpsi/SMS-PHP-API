@@ -46,7 +46,7 @@ class SMSSender  extends Core{
 			throw new SMSServiceException('Format of the address is invalid.', 'E1325');
 		else {
 			$jsonStream = (is_string($addresses))?$this->resolveJsonStream($message, array($addresses)):(is_array($addresses)?$this->resolveJsonStream($message, $addresses):null);
-			return ($jsonStream!=null)?$this->sendRequest($jsonStream,$this->serverURL):false;
+			return ($jsonStream!=null)?$this->handleResponse( $this->sendRequest($jsonStream,$this->serverURL) ):false;
 		
 		}
 	}
