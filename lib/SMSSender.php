@@ -71,24 +71,24 @@ class SMSSender  extends Core{
 	   	           				"destinationAddresses"=>$addresses
            					);
 		
-		if (isset($sourceAddress)) {
-			$messageDetails=array("sourceAddress" => $sourceAddress);
+		if (isset($this->sourceAddress)) {
+			$messageDetails= array_merge($messageDetails,array("sourceAddress" => $this->sourceAddress));   
 		}
 		
-		if (isset($deliveryStatusRequest)) {
-			$messageDetails=array("deliveryStatusRequest" => $deliveryStatusRequest);
+		if (isset($this->deliveryStatusRequest)) {
+			$messageDetails= array_merge($messageDetails,array("deliveryStatusRequest" => $this->deliveryStatusRequest));
 		}
 		
-		if (isset($binaryHeader)) {
-			$messageDetails=array("binaryHeader" => $binaryHeader);
+		if (isset($this->binaryHeader)) {
+			$messageDetails= array_merge($messageDetails,array("binaryHeader" => $this->binaryHeader));
 		}	
 		
-		if (isset($version)) {
-			$messageDetails=array("version" => $version);
+		if (isset($this->version)) {
+			$messageDetails= array_merge($messageDetails,array("version" => $this->version)); 
 		}	
 		
-		if (isset($encoding)) {
-			$messageDetails=array("encoding" => $encoding);
+		if (isset($this->encoding)) {
+			$messageDetails= array_merge($messageDetails,array("encoding" => $this->encoding)); 
 		}
 		
 		$applicationDetails = array('applicationId'=>$this->applicationId,
