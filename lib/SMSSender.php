@@ -70,7 +70,7 @@ class SMSSender  extends Core{
 		$messageDetails = array("message"=>$message,
 	   	           				"destinationAddresses"=>$addresses
            					);
-		
+		/*
 		if (isset($this->sourceAddress)) {
 			$messageDetails= array_merge($messageDetails,array("sourceAddress" => $this->sourceAddress));   
 		}
@@ -90,7 +90,7 @@ class SMSSender  extends Core{
 		if (isset($this->encoding)) {
 			$messageDetails= array_merge($messageDetails,array("encoding" => $this->encoding)); 
 		}
-		
+		*/
 		$applicationDetails = array('applicationId'=>$this->applicationId,
 						 'password'=>$this->password,);
 		
