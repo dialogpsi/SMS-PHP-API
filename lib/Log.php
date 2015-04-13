@@ -9,6 +9,7 @@
 
 class Logger{
 	public function WriteLog($logStream){
+		date_default_timezone_set('Asia/Colombo');
 		$_LOGFILE = 'LogData.log';
 		
 		$file = fopen($_LOGFILE, 'a');
